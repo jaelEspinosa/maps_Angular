@@ -1,0 +1,14 @@
+
+
+
+<ul class="list-group">
+   <li  [ngStyle]="{'cursor':'pointer'}"
+        *ngFor="let item of menuItems"
+        class="list-group-item"
+        [routerLink]="[item.ruta]"
+        routerLinkActive="active"
+        >
+    {{ item.nombre }}
+   </li>
+
+</ul>
