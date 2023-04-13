@@ -16,7 +16,11 @@ export class MenuComponent {
   menuItems: MenuItem[] = [
     {
       ruta: 'mapas/fullscreen',
-      nombre: 'FullScreen'
+      nombre: 'FullScreen-Normal'
+    },
+    {
+      ruta: 'mapas/satellite',
+      nombre: 'FullScreen-Sat'
     },
     {
       ruta: 'mapas/zoom-range',

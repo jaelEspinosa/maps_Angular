@@ -26,9 +26,12 @@ export class FullscreenComponent implements OnInit{
     (mapboxgl as any).accessToken = environment.mapboxToken;
   var map = new mapboxgl.Map({
     container: 'mapa',
-    style: 'mapbox://styles/mapbox/streets-v11'
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center:[-6.2310414, 36.5943686],
+    zoom:16
 });
 
   }
 
 }
+/* 36.5943686,-6.2310414 */
