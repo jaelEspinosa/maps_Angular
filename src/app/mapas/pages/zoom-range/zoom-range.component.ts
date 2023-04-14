@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { MapServicesService } from '../../services/map-services.service';
 
@@ -14,6 +14,7 @@ import { MapServicesService } from '../../services/map-services.service';
     }
 
     .row{
+      font-size:14px;
       width:300px;
       background-color: white;
       bottom: 16px;
@@ -34,20 +35,30 @@ import { MapServicesService } from '../../services/map-services.service';
     `
   ]
 })
-export class ZoomRangeComponent implements AfterViewInit{
+export class ZoomRangeComponent implements AfterViewInit, OnDestroy{
 
   @ViewChild('mapa') divMapa!: ElementRef
 
   mapa!: mapboxgl.Map
   zoomLevel: number = 17
-  mapStyle: string = 'mapbox://styles/mapbox/streets-v12'
+  mapStyle: string = ' '
+  center:[number, number] = [-6.232614553781429, 36.59432074648235 ]
+
   constructor(private mapServices: MapServicesService ) {}
+
+  ngOnDestroy(){
+    // cuando el componente se destrulla elimino los eventlistener
+    this.mapa.off('zoom', ()=>{})
+    this.mapa.off('zoomend', ()=>{})
+    this.mapa.off('move', ()=>{})
+
+  }
 
   ngAfterViewInit() {
       this.mapa = new mapboxgl.Map({
         container: this.divMapa.nativeElement,
         style: this.mapStyle,
-        center:[ -6.232614553781429, 36.59432074648235 ],
+        center:this.center,
         zoom: this.zoomLevel
         });
       this.mapa.on('zoom', (ev)=>{
@@ -57,9 +68,14 @@ export class ZoomRangeComponent implements AfterViewInit{
         if(this.mapa.getZoom() > 19){
           this.mapa.zoomTo(19)
         }
-        if(this.mapa.getZoom() < 3){
-          this.mapa.zoomTo(2.5)
+        if(this.mapa.getZoom() < 1.5){
+          this.mapa.zoomTo(1.5)
         }
+      })
+      this.mapa.on('move', (ev)=>{
+         this.center = [this.mapa.getCenter().lng, this.mapa.getCenter().lat]
+
+
       })
   }
 
