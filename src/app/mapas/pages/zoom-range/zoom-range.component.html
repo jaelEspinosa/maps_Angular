@@ -1,25 +1,33 @@
 <div #mapa class="mapa-container"></div>
 
 
-<div class="row">
+<div class="row shadow">
   <div class="col-12">
     <label
     class="form-label zoom">
     <span>Zoom: {{zoomLevel | number:'2.0-2'}}</span>
     <span>-Lng, Lat : [123, 456]</span>
   </label>
-  <input type="range" class="form-range">
+  <input
+          type="range"
+          class="form-range"
+          [value]="zoomLevel"
+          min="2.5"
+          max="19"
+          (input)="zoomChanged( zoomInput.value)"
+          #zoomInput
+          >
   </div>
 
   <div class="col-12">
     <button
     (click)="zoomIn()"
-      class="btn btn-primary"
+      class="btn btn-sm btn-primary"
     >+</button>
 
     <button
     (click)="zoomOut()"
-    class="btn btn-primary float-end"
+    class="btn btn-sm btn-primary float-end"
    >-</button>
 
   </div>
@@ -27,7 +35,7 @@
 
 </div>
 <button
-class="btn  btn-sm btn-primary satellite"
+class="btn shadow btn-sm btn-primary satellite"
 (click)="setStyleMap()"
 >
 {{mapStyle.includes('satellite') ?  'Normal' : 'satellite'}}

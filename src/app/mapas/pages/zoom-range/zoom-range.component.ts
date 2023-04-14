@@ -77,5 +77,8 @@ export class ZoomRangeComponent implements AfterViewInit{
       this.mapa.zoomIn();
 
   }
+  zoomChanged(valor: string){
+    this.mapa.zoomTo(Number(valor))
+  }
 
 }
