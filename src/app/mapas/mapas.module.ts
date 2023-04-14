@@ -7,7 +7,7 @@ import { FullscreenComponent } from './pages/fullscreen/fullscreen.component';
 import { MarcadoresComponent } from './pages/marcadores/marcadores.component';
 import { ZoomRangeComponent } from './pages/zoom-range/zoom-range.component';
 import { PropiedadesComponent } from './pages/propiedades/propiedades.component';
-import { FullscreenSatComponent } from './pages/fullscreen-sat/fullscreen-sat.component';
+
 
 
 
@@ -18,7 +18,7 @@ import { FullscreenSatComponent } from './pages/fullscreen-sat/fullscreen-sat.co
     MarcadoresComponent,
     ZoomRangeComponent,
     PropiedadesComponent,
-    FullscreenSatComponent,
+
 
   ],
   imports: [

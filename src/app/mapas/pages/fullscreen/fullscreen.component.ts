@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl'
-import { environment } from 'src/environments/environment.prod';
+import { MapServicesService } from '../../services/map-services.service';
+
 
 
 
@@ -9,29 +10,46 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './fullscreen.component.html',
   styles: [
     `
-    #mapa{
+    .mapa{
       position: absolute;
       width: 100%;
       height: 100vh;
     }
+    .satellite{
+      width:100px;
+      top: 36px;
+      right:50px;
+      position:fixed;
+      z-index:99999;
+    }
     `
   ]
 })
-export class FullscreenComponent implements OnInit{
+export class FullscreenComponent implements AfterViewInit{
 
-  constructor() {}
+  @ViewChild('mapa') divMapa!: ElementRef
 
-  ngOnInit(): void {
+  map!:mapboxgl.Map;
+  mapStyle:string = 'mapbox://styles/mapbox/streets-v12';
+  constructor(private mapservices:MapServicesService) {}
 
-    (mapboxgl as any).accessToken = environment.mapboxToken;
-  var map = new mapboxgl.Map({
-    container: 'mapa',
-    style: 'mapbox://styles/mapbox/streets-v12',
-    center:[-6.2310414, 36.5943686],
-    zoom:16
-});
+  ngAfterViewInit(): void {
+
+      this.map = new mapboxgl.Map({
+        container: this.divMapa.nativeElement,
+        style: this.mapStyle,
+        center:[ -6.232614553781429, 36.59432074648235 ],
+        zoom:17
+    });
+
+  }
+
+  setStyleMap(){
+  this.mapStyle = this.mapservices.setStyleMap(this.mapStyle)
+   this.map.setStyle(this.mapStyle)
+
 
   }
 
 }
-/* 36.5943686,-6.2310414 */
+

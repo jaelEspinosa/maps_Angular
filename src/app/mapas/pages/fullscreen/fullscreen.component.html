@@ -1,4 +1,10 @@
 
-<div id="mapa"></div>
+<div #mapa class="mapa"></div>
 
 
+<button
+class="btn  btn-sm btn-primary satellite"
+(click)="setStyleMap()"
+>
+{{mapStyle.includes('satellite') ?  'Normal' : 'satellite'}}
+</button>

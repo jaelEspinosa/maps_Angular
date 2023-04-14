@@ -11,3 +11,9 @@ app-menu{
   left:20px;
   z-index: 99999;
 }
+
+.zoom{
+  display: flex;
+  justify-content:space-around;
+  align-items:center ;
+}
