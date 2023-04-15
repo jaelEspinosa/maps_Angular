@@ -1,1 +1,33 @@
-<p>marcadores works!</p>
+
+
+  <ul class="list-grup satellite2">
+    <li
+        (click)="addMarker()"
+        class="list-group-item list-group-item-info mb-2 shadow"
+    >+ Agregar
+  </li>
+    <li
+        *ngFor="let marker of markers;let index = index"
+        (click)="goMarker(marker.marker!)"
+        (dblclick)="deleteMarker(index)"
+        class="list-group-item mb-1"
+        [ngStyle]="{'background-color':marker.color}"
+        >
+      Marker-{{index+1}}
+    </li>
+  </ul>
+
+
+
+
+<div #mapa
+
+class="mapa-container"></div>
+
+
+<button
+class="btn shadow btn-sm btn-info satellite"
+(click)="setStyleMap()"
+>
+{{mapStyle.includes('satellite') ?  'Normal' : 'satellite'}}
+</button>

@@ -27,7 +27,7 @@ import { MapServicesService } from '../../services/map-services.service';
     .satellite{
       width:100px;
       top: 36px;
-      right:50px;
+      right:10px;
       position:fixed;
       z-index:99999;
     }
@@ -41,7 +41,7 @@ export class ZoomRangeComponent implements AfterViewInit, OnDestroy{
 
   mapa!: mapboxgl.Map
   zoomLevel: number = 17
-  mapStyle: string = ' '
+  mapStyle: string = 'mapbox://styles/mapbox/streets-v12'
   center:[number, number] = [-6.232614553781429, 36.59432074648235 ]
 
   constructor(private mapServices: MapServicesService ) {}

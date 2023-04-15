@@ -18,7 +18,7 @@ import { MapServicesService } from '../../services/map-services.service';
     .satellite{
       width:100px;
       top: 36px;
-      right:50px;
+      right:10px;
       position:fixed;
       z-index:99999;
     }

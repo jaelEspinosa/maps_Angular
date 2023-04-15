@@ -6,7 +6,7 @@ import { MiniMapaComponent } from './components/mini-mapa/mini-mapa.component';
 import { FullscreenComponent } from './pages/fullscreen/fullscreen.component';
 import { MarcadoresComponent } from './pages/marcadores/marcadores.component';
 import { ZoomRangeComponent } from './pages/zoom-range/zoom-range.component';
-import { PropiedadesComponent } from './pages/propiedades/propiedades.component';
+
 
 
 
@@ -17,13 +17,13 @@ import { PropiedadesComponent } from './pages/propiedades/propiedades.component'
     FullscreenComponent,
     MarcadoresComponent,
     ZoomRangeComponent,
-    PropiedadesComponent,
+
 
 
   ],
   imports: [
     CommonModule,
-    MapasRoutingModule
+    MapasRoutingModule,
   ],
 
 })
