@@ -31,6 +31,13 @@ import { MapServicesService } from '../../services/map-services.service';
       position:fixed;
       z-index:99999;
     }
+    .satellite2{
+      width:100px;
+      top: 76px;
+      right:10px;
+      position:fixed;
+      z-index:99999;
+    }
 
     `
   ]
@@ -40,9 +47,9 @@ export class ZoomRangeComponent implements AfterViewInit, OnDestroy{
   @ViewChild('mapa') divMapa!: ElementRef
 
   mapa!: mapboxgl.Map
-  zoomLevel: number = 17
+  zoomLevel: number = 16
   mapStyle: string = 'mapbox://styles/mapbox/streets-v12'
-  center:[number, number] = [-6.232614553781429, 36.59432074648235 ]
+  center:[number, number] = [-3.688299916528383, 40.453153956866586 ]
 
   constructor(private mapServices: MapServicesService ) {}
 
@@ -77,6 +84,9 @@ export class ZoomRangeComponent implements AfterViewInit, OnDestroy{
 
 
       })
+
+
+
   }
 
 
@@ -95,6 +105,38 @@ export class ZoomRangeComponent implements AfterViewInit, OnDestroy{
   }
   zoomChanged(valor: string){
     this.mapa.zoomTo(Number(valor))
+  }
+
+  myPosition(){
+
+      this.mapServices.getGeoLoc()
+      .subscribe(position => {
+       this.mapa.flyTo({
+        center:position
+       })
+       const newMarker = new mapboxgl.Marker({
+        draggable:true,
+       })
+         .setLngLat(position)
+         .addTo(this.mapa)
+
+       const popup = new mapboxgl.Popup({ closeOnClick: false })
+         .setLngLat(position)
+         .setHTML(`
+                <div style="
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        width:125px;
+                        ">
+                    <h5>Tu posición</h5>
+                </div>
+                `
+                )
+         .addTo(this.mapa);
+       })
+
+
   }
 
 }

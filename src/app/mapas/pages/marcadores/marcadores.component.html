@@ -4,7 +4,7 @@
     <li
         (click)="addMarker()"
         class="list-group-item list-group-item-info mb-2 shadow"
-    >+ Agregar
+    >+ Marcador
   </li>
     <li
         *ngFor="let marker of markers;let index = index"
@@ -30,4 +30,11 @@ class="btn shadow btn-sm btn-info satellite"
 (click)="setStyleMap()"
 >
 {{mapStyle.includes('satellite') ?  'Normal' : 'satellite'}}
+</button>
+
+<button
+class="btn shadow btn-sm btn-info satellite3"
+(click)="myPosition()"
+>
+Mi ubicación
 </button>

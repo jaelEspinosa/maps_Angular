@@ -24,8 +24,8 @@ interface MarkerWidthColor {
 
     .satellite{
       width:100px;
-      top: 36px;
-      right:10px;
+      top: 22px;
+      left:150px;
       position:fixed;
       z-index:99999;
     }
@@ -37,7 +37,14 @@ interface MarkerWidthColor {
       text-align:center;
       position:fixed;
       top:76px;
-      right:10px;
+      right:5px;
+      z-index:99999;
+    }
+    .satellite3{
+      width:100px;
+      top: 22px;
+      left:255px;
+      position:fixed;
       z-index:99999;
     }
     `
@@ -58,7 +65,7 @@ export class MarcadoresComponent implements AfterViewInit {
   mapa!: mapboxgl.Map
   zoomLevel: number = 17
   mapStyle: string = 'mapbox://styles/mapbox/streets-v12'
-  center:[number, number] = [-6.232614553781429, 36.59432074648235 ]
+  center:[number, number] = [-3.688299916528383, 40.453153956866586 ]
 
   // array of markers
 
@@ -155,6 +162,39 @@ deleteMarker(index: number){
   this.markers[index].marker?.remove()
   this.markers.splice(index, 1)
   this.saveMarkerLocalStorage()
+}
+
+
+myPosition(){
+
+  this.mapServices.getGeoLoc()
+  .subscribe(position => {
+   this.mapa.flyTo({
+    center:position
+   })
+   const newMarker = new mapboxgl.Marker({
+    draggable:true,
+   })
+     .setLngLat(position)
+     .addTo(this.mapa)
+
+   const popup = new mapboxgl.Popup({ closeOnClick: false })
+     .setLngLat(position)
+     .setHTML(`
+            <div style="
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    width:125px;
+                    ">
+                <h5>Tu posición</h5>
+            </div>
+            `
+            )
+     .addTo(this.mapa);
+   })
+
+
 }
 
 }

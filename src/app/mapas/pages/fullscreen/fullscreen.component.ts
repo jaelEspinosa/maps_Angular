@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl'
 import { MapServicesService } from '../../services/map-services.service';
 
@@ -25,23 +25,39 @@ import { MapServicesService } from '../../services/map-services.service';
     `
   ]
 })
-export class FullscreenComponent implements AfterViewInit{
+export class FullscreenComponent implements AfterViewInit {
 
   @ViewChild('mapa') divMapa!: ElementRef
 
   map!:mapboxgl.Map;
   mapStyle:string = 'mapbox://styles/mapbox/streets-v12';
   constructor(private mapservices:MapServicesService) {}
+  geoPosition!: [number, number]
+
+
+
+
+  obtenerCoord(){
+    navigator.geolocation.getCurrentPosition(position => {
+      this.geoPosition=[position.coords.longitude, position.coords.latitude]
+
+       this.map.setCenter(this.geoPosition)
+
+
+     })
+  }
 
   ngAfterViewInit(): void {
+
 
       this.map = new mapboxgl.Map({
         container: this.divMapa.nativeElement,
         style: this.mapStyle,
-        center:[ -6.232614553781429, 36.59432074648235 ],
+        center: [0, 0],
         zoom:17
     });
 
+    this.obtenerCoord()
   }
 
   setStyleMap(){
